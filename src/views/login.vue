@@ -2,7 +2,7 @@
 	<div class="login-container">
     <div class="login-content">
       <div class="log">
-        <img src="/static/images/log.png" alt="超级鸡">
+        <img src="/static/images/log.png" alt="51兑换">
       </div>
       <div class="form-content">
         <div class="input-box">
@@ -15,11 +15,11 @@
         </div>
         <div class="message-box">错误信息</div>
         <div class="btn-box">
-          <div class="btn">登  录</div>
+          <div class="btn" @click="login">登  录</div>
         </div>
         <div class="login-footer">
           <a href="#">忘记密码</a>
-          <a href="/register">马上注册</a>
+          <a href="/#/register">马上注册</a>
         </div>
       </div>
     </div>
@@ -42,6 +42,7 @@
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 0 5px #c7c5c5;
+      transform: translateY(50%);
       .log {
         width: 65px;
         height: 65px;
@@ -114,6 +115,7 @@
   }
 </style>
 <script>
+  import {setCookie} from '../assets/js/common'
 	export default {
 		name: '',
 		data() {
@@ -124,6 +126,15 @@
 		},
 		
 		mounted() {
-		}
+		},
+		methods:{
+		  login:function () {
+        setCookie('sessionToken','sessionToken');
+        var route=this.$route;
+        var query=route.query;
+        let redirect=query.redirect;
+        this.$router.replace(redirect?decodeURIComponent(query.redirect):'/')
+      }
+    }
 	}
 </script>

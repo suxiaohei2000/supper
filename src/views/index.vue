@@ -1,120 +1,118 @@
 <template>
   <div class="home-container">
-    <div class="slider-container">
+    <div class="slider-container" :style="sliderH">
       <div class="slider-content">
         <div class="slider-item">
           <div class="slider-item-title">
             最便捷的兑换平台
           </div>
           <div class="slider-item-info">
-            快速提现，挖矿洗白白
+            快速 安全 私密
           </div>
           <div class="slider-button">
-            <div class="btn active">开始</div>
+            <div class="btn active" @click="start">开始</div>
             <div class="btn">帮助</div>
           </div>
         </div>
       
       </div>
-      <div class="slider-footer">
-        <div class="slider-footer-content">
-          <div class="slider-footer-item">
-            <i class="fa fa-shopping-cart fa-3x"></i>
-            <div class="item-info">
-              <span>快速</span>
-              <span>30分钟拿到现金</span>
-            </div>
+     
+    </div>
+    <div class="slider-footer">
+      <div class="slider-title">核心优势</div>
+      <div class="slider-footer-content">
+        <div class="slider-footer-item">
+          <i class="fa fa-shopping-cart fa-3x"></i>
+          <div class="item-info">
+            <span>快速</span>
+            <span>30分钟拿到现金</span>
           </div>
-          <div class="slider-footer-item">
-            <i class="fa fa-lock fa-3x"></i>
-            <div class="item-info">
-              <span>安全</span>
-              <span>google、FB顶级安全大神照顾你的生意</span>
-            </div>
+        </div>
+        <div class="slider-footer-item">
+          <i class="fa fa-lock fa-3x"></i>
+          <div class="item-info">
+            <span>安全</span>
+            <span>google、FB顶级安全大神照顾你的生意</span>
           </div>
-          <div class="slider-footer-item">
-            <i class="fa fa-reply fa-3x"></i>
-            <div class="item-info">
-              <span>私密</span>
-              <span>1v1专属私密连接</span>
-            </div>
+        </div>
+        <div class="slider-footer-item">
+          <i class="fa fa-reply fa-3x"></i>
+          <div class="item-info">
+            <span>私密</span>
+            <span>1v1专属私密连接</span>
           </div>
         </div>
       </div>
-      <div class="home-page-2">
-        <img src="../assets/images/home-page-2.png" alt="">
-      </div>
-      <div class="home-page-2-footer">
-        <span> 欢迎来到xx，最新最快最安全，QQ群：xxxxxx</span>
-      </div>
-      <div class="home-page-3">
-        <div class="home-page-3-content">
-          <div class="home-page-title">
-            FAQ
-          </div>
-         <ul>
-           <li>
-             <span>免费吗</span>
-             <span>只需要5%的手续费，便可以轻松兑换现金</span>
-           </li>
-           <li>
-             <span>服务稳定么？</span>
-             <span>兑换服务部署于全球各地，7*24小时稳定服务</span>
-           </li>
-         </ul>
-          <ul>
-            <li>
-              <span>支持哪几种货币？</span>
-              <span>目前支持比特币、以太坊、以太经典、莱特币等8大主流币种，未来会逐步增加，尽请关注</span>
-            </li>
-            <li>
-              <span>实时提款么？</span>
-              <span>我们最短会在30分钟内完成。不过，由于外汇交易需要一定的时间，也有可能需要在3日内完成。</span>
-            </li>
-          </ul>
-          <p >
-            还有问题？请加QQ群：******888
-          </p>
-        </div>
-      </div>
-      <footer>
-        <div class="footer-nav">
-          <div class="footer-nav-box">
-            <div class="nav-box-left">
-              <div class="nav_log">
-                <div class="log">
-                  <img src="/static/images/log.png" alt="">
-                </div>
-                <span>超级鸡</span>
-              </div>
-              <p>最新最快最安全的兑换平台</p>
+    </div>
+    <div class="home-page-2">
+      <div class="slider-title black">支持8种货币</div>
+      <p class="text-center">支持比特币、以太坊、以太经典、莱特币等8大主流币种，一键卖出，轻松收益</p>
+      <div class="home-page-2-content">
+        <div>
+          <div class="hover">
+            <div class="hover-content">
+              <span>BTC</span>
+              <span>比特币</span>
             </div>
-            <ul class="nav-box-right">
-              <li>
-                <span>交易中心</span>
-                <span>我的账户</span>
-                <span>我的订单</span>
-              </li>
-              <li>
-                <span>帮助中心</span>
-                <span>FAQ</span>
-                <span>技术支持</span>
-              </li>
-              <li>
-                <span>关于我们</span>
-                <span>我们是谁</span>
-                <span>联系我们</span>
-              </li>
-            </ul>
+           
           </div>
+          <img src="../assets/images/pge-2-1.jpg" alt="">
         </div>
-        <div class="footer-bottom">
-          <div>
-            <span>Copyright 2017.All rights reserved.</span>
-            <span>China: +86 2 33 44 55 66    US: +11 222 333 444    support@shark.com</span>
+        <div>
+          <div class="hover">
+            <div class="hover-content">
+              <span>LTC</span>
+              <span>莱特币</span>
+            </div>
+            
           </div>
+          <img src="../assets/images/pge-2-2.jpg" alt="">
         </div>
-      </footer>
+        <div>
+          <div class="hover">
+            <div class="hover-content">
+              <span>ETH</span>
+              <span>以太坊</span>
+            </div>
+            
+          </div>
+          <img src="../assets/images/pge-2-3.jpg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="home-page-2-footer">
+      <div class="slider-title">联系我们</div>
+      <span>欢迎来到xx，最新最快最安全，QQ群：xxxxxx</span>
+    </div>
+    <div class="home-page-3">
+      <div class="home-page-3-content">
+        <div class="home-page-title">
+          FAQ
+        </div>
+        <ul>
+          <li>
+            <span>免费吗</span>
+            <span>只需要5%的手续费，便可以轻松兑换现金</span>
+          </li>
+          <li>
+            <span>服务稳定么？</span>
+            <span>兑换服务部署于全球各地，7*24小时稳定服务</span>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <span>支持哪几种货币？</span>
+            <span>目前支持比特币、以太坊、以太经典、莱特币等8大主流币种，未来会逐步增加，尽请关注</span>
+          </li>
+          <li>
+            <span>实时提款么？</span>
+            <span>我们最短会在30分钟内完成。不过，由于外汇交易需要一定的时间，也有可能需要在3日内完成。</span>
+          </li>
+        </ul>
+        <p >
+          还有问题？请加QQ群：******888
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -122,6 +120,7 @@
   .home-container {
     min-width: 1200px;
     position: relative;
+    margin-top:0 !important;
     .slider-container {
       height: 800px;
       width: 100%;
@@ -133,6 +132,7 @@
         height: 100%;
         margin: auto;
         position: relative;
+        text-align: center;
         &:after {
           content: '';
           height: 100%;
@@ -145,11 +145,11 @@
           color: #fff;
           .slider-item-title {
             font-weight: 600;
-            font-size: 60px;
+            font-size: 72px;
             line-height: 100px;
           }
           .slider-item-info {
-            font-size: 30px;
+            font-size: 20px;
             line-height: 50px;
           }
           .slider-button {
@@ -167,18 +167,45 @@
                 margin-left: 20px;
               }
               &.active {
-                background: #ff7043;
+                background: #43baff;
                 border-color: transparent;
+              }
+              &:hover{
+                opacity:.9;
               }
               
             }
           }
         }
       }
+      
+    }
+    .slider-title{
+      font-size:30px;
+      padding:10px 0;
+      text-align: center;
+      color:#fff;
+      display: block;
+      position: relative;
+      letter-spacing: 0.2em;
+      &:after{
+        content: '';
+        height:5px;
+        width: 80px;
+        background: #fff;
+        display: block;
+        margin:20px auto;
+      }
+      &.black{
+        color:#000;
+        &:after{
+          background: #000;
+        }
+      }
     }
     .slider-footer {
       width: 100%;
-      padding: 20px 0;
+      padding: 20px 0 40px;
       background: #171717;
       .slider-footer-content {
         width: 1000px;
@@ -212,15 +239,68 @@
       }
     }
     .home-page-2 {
-      width: 1200px;
-      margin: auto;
-      img {
-        width: 100%;
+      padding:60px 0 40px;
+      &>p{
+        font-size:16px;
+      }
+      .home-page-2-content{
+        display: flex;
+        margin-top:20px;
+        &>div{
+          flex: 1;
+          position: relative;
+         font-size:0;
+          img{
+            width: 100%;
+            display: block;
+          }
+          .hover{
+            display: none;
+            position: absolute;
+            top:0;
+            left:0;
+            height:100%;
+            width: 100%;
+            text-align: center;
+            background: rgba(0,0,0,.5);
+            cursor: pointer;
+            
+            &:after{
+              content: '';
+              display: inline-block;
+              vertical-align: middle;
+              height:100%;
+            }
+            .hover-content{
+              display: inline-block;
+              vertical-align: middle;
+              font-size:14px;
+              color:#fff;
+              span{
+                display: block;
+                line-height:20px;
+                font-weight: 600;
+              }
+            }
+          }
+          &:hover{
+            .hover{
+              display: block;
+            }
+          }
+        }
       }
     }
     .home-page-2-footer {
-      height: 60px;
-      background: #171717;
+      background-image: url(../assets/images/connect_bg.jpg);
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      -webkit-background-size: cover;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      padding: 60px 0;
       text-align: center;
       &:after {
         content: '';
@@ -230,7 +310,7 @@
       }
       span {
         display: inline-block;
-        font-size: 14px;
+        font-size: 16px;
         color: #ffffff;
         line-height: 20px;
         vertical-align: middle;
@@ -256,8 +336,11 @@
             width: 49%;
             display: inline-block;
             vertical-align: top;
+            &:first-child{
+              padding-right:15%;
+            }
             &:last-child{
-              padding-left:19%;
+              padding-left:15%;
             }
             span{
               display: block;
@@ -280,93 +363,30 @@
         }
       }
     }
-    footer{
-      width: 100%;
-      overflow: hidden;
-      background: #fff;
-      .footer-nav-box{
-        width: 1200px;
-        margin:auto;
-        overflow: hidden;
-        .nav-box-left{
-          float: left;
-          .nav_log{
-            padding:10px 0;
-            span{
-              display: inline-block;
-              vertical-align: middle;
-              font-size:20px;
-            }
-            .log{
-              width: 40px;
-              height:40px;
-              display: inline-block;
-              vertical-align: middle;
-              margin-right:15px;
-              img {
-                width: 100%;
-                height:100%;
-              }
-            }
     
-          }
-          p{
-            font-size:12px;
-            color:#777777;
-          }
-        }
-        .nav-box-right{
-          float: right;
-          width: 610px;
-          padding-top:10px;
-          li{
-            width: 200px;
-            font-size:12px;
-            cursor: pointer;
-            color:#777777;
-            display: inline-block;
-            span{
-              display: block;
-              margin-bottom:10px;
-              
-              &:first-child{
-                font-size: 14px;
-                color: #333333;
-              }
-            }
-          }
-        }
-      }
-      .footer-bottom{
-        background: #171717;
-        color:#fff;
-        overflow: hidden;
-        &>div{
-          width: 1200px;
-          margin:auto;
-          padding:10px 0 20px;
-          span{
-            float: left;
-            &:last-child{
-              float: right;
-            }
-          }
-        }
-      }
-    }
   }
 </style>
 <script>
   export default {
     name: "",
     data() {
-      return {};
+      return {
+        sliderH:{
+        }
+      };
     },
     
     created() {
     },
     
     mounted() {
+      var height=document.body.clientHeight
+      this.sliderH=Object.assign({},this.sliderH,{height:height+'px'})
+    },
+    methods:{
+      start:function () {
+        this.$router.push('/mart')
+      }
     }
   };
 </script>

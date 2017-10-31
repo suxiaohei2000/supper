@@ -1,7 +1,5 @@
 {
-  "presets": [
-   /* ["env", { "modules": false }]*/
-  ],
+  "presets": ["es2015"],
   "plugins": [
     "syntax-dynamic-import"
   ]

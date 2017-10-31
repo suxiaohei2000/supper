@@ -1,12 +1,16 @@
 <template>
   <div class="app-container">
-    <router-view name="nav"></router-view>
-    <transition>
-      <keep-alive>
+    <keep-alive>
+      <router-view name="nav"></router-view>
+    </keep-alive>
+    <div class="app-content">
+      <transition>
         <router-view></router-view>
-      </keep-alive>
-    </transition>
-  
+      </transition>
+    </div>
+    
+    
+     <router-view name="footer"></router-view>
   </div>
 </template>
 
@@ -32,4 +36,12 @@
 
 <style lang="less">
   @import "./assets/css/main.less";
+  .app-content{
+    @diff :125px;
+    min-height:calc(~"100% - @{diff}");
+    overflow: hidden;
+    &>div{
+      margin-top:62px;
+    }
+  }
 </style>

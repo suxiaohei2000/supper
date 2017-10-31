@@ -1,6 +1,6 @@
 <template>
   <div class="nav-container">
-    <header :class="navActive">
+    <header class="nav-active">
       <nav class="nav_bar">
         <a class="nav_log" href="/">
           <div class="log"><img src="/static/images/log.png" alt=""></div>
@@ -109,7 +109,6 @@
       return {
         active:'',
         sessionToken:'',
-        navActive:''
       };
     },
     
@@ -122,16 +121,6 @@
       this.active=name;
       var sessionToken=getCookie('sessionToken');
       this.sessionToken=sessionToken;
-      //滚动
-      
-      window.onscroll=function () {
-        var sTop=document.body.scrollTop
-        if(sTop>60){
-          _this.navActive='nav-active';
-        }else{
-          _this.navActive=''
-        }
-      }
     }
   };
 </script>

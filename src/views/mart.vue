@@ -59,7 +59,7 @@
           </div>
           <span class="fa fa-angle-double-right"></span>
           <div class="input-box">
-            <i class="fa" :class="item.icon"></i>
+            <i class="fa fa-cny" ></i>
             <input type="number" v-model="payMoney" disabled >
           </div>
         </div>
@@ -75,14 +75,54 @@
             </span>
           </div>
         </div>
-        <div class="mart-step-2-btn-content">
+        <div class="mart-step-btn-content">
           <div class="btn-box">
             <span class="btn" @click="pre">上一步</span>
             <span class="btn" @click="confirm">确认</span>
           </div>
         </div>
       </div>
-      
+      <div class="mart-step-3-content" v-if="step==3">
+        <div class="mart-step-title">
+          <p>您的兑换申请已经受理，请尽快完成转账操作。</p>
+          <p>若已完成转账，请等待并随时关注您的账户余额。</p>
+        </div>
+        <ul class="order-content">
+          <li>
+            <span>订单号：</span>
+            <span>YTC2017082117213498765</span>
+          </li>
+          <li>
+            <span>币种：</span>
+            <span>以太坊</span>
+          </li>
+          <li>
+            <span>下单时间：</span>
+            <span>20170821 17:21:34</span>
+          </li>
+          <li>
+            <span>兑换数量：</span>
+            <span>32</span>
+          </li>
+          <li>
+            <span>结算方式：</span>
+            <span>支付宝</span>
+          </li>
+          <li>
+            <span>用户ID：</span>
+            <span>老张头玩币</span>
+          </li>
+          <li>
+            <span>用户钱包地址：</span>
+            <span>2017082**********98765</span>
+          </li>
+        </ul>
+        <div class="mart-step-btn-content">
+          <div class="btn-box">
+            <span class="btn" @click="reStart">再来一笔</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -223,9 +263,33 @@
       width: 800px;
       margin:auto;
       position: relative;
-      padding:20px;
+      padding:50px 20px;
       box-shadow: 0 0 5px #c7c5c5;
       background: #fff;
+      .mart-step-btn-content{
+        text-align: center;
+        .btn-box{
+          display: inline-block;
+          .btn{
+            height:36px;
+            line-height: 36px;
+            border: 1px solid #cad2db;
+            color:#171717;
+            border-radius: 5px;
+            padding:0 20px;
+            cursor: pointer;
+            &:hover{
+              border-color: transparent;
+              background: #43baff;
+              color:#fff;
+            }
+            &+.btn{
+              margin-left:40px;
+            }
+          }
+        }
+      }
+      
       .money-list{
         width: 382px;
         margin:auto;
@@ -319,7 +383,7 @@
             vertical-align: middle;
             width: 100px;
             font-size:16px;
-            color:#f16f20;
+            color:#43baff;
             text-align: center;
           }
         }
@@ -355,31 +419,40 @@
             }
           }
         }
-        .mart-step-2-btn-content{
+      }
+      .mart-step-3-content{
+        width: 500px;
+        margin:auto;
+        .mart-step-title{
+          font-size:16px;
+          line-height: 30px;
           text-align: center;
-          .btn-box{
-            display: inline-block;
-            .btn{
-              height:36px;
-              line-height: 36px;
-              border: 1px solid #cad2db;
-              color:#171717;
-              border-radius: 5px;
-              padding:0 20px;
-              cursor: pointer;
-              &+.btn{
-                margin-left:40px;
-              }
-              &:hover{
-                border-color: transparent;
-                background: #f16f20;
-                color:#fff;
+        }
+        .order-content{
+          width: 350px;
+          display: block;
+          margin:15px auto ;
+          li{
+            display: flex;
+            font-size:14px;
+            padding:10px;
+            border-bottom: 1px solid #E3E3E3;
+            width: 100%;
+            &:last-child{
+              border-bottom: none;
+            }
+            span{
+              flex:1;
+              display: block;
+              vertical-align: middle;
+              &:first-child{
+                width: 120px;
+                flex:none;
               }
             }
           }
         }
       }
-      
       
     }
   }
@@ -450,6 +523,9 @@
       },
       confirm:function () {
         this.next()
+      },
+      reStart:function () {
+        this.step=1;
       }
     }
   };

@@ -2,7 +2,7 @@
 	<div class="login-container">
     <div class="login-content">
       <div class="log">
-        <img src="/static/images/log.png" alt="超级鸡">
+        <img src="/static/images/log.png" alt="51兑换">
       </div>
       <div class="form-content">
         <div class="input-box">
@@ -24,7 +24,7 @@
           <div class="btn">注册</div>
         </div>
         <div class="login-footer">
-          <a href="/login">已有账户登录</a>
+          <a href="/#/login">已有账户登录</a>
         </div>
       </div>
     </div>
@@ -47,6 +47,7 @@
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 0 5px #c7c5c5;
+      transform: translateY(50%);
       .log {
         width: 65px;
         height: 65px;
