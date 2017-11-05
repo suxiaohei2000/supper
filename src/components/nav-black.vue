@@ -115,12 +115,18 @@
     created() {
     },
     mounted() {
-      var _this=this;
       var route=this.$route
       var name=route.name;
       this.active=name;
       var sessionToken=getCookie('sessionToken');
       this.sessionToken=sessionToken;
+    },
+    watch:{
+      $route:function () {
+        var route=this.$route
+        var name=route.name;
+        this.active=name;
+      }
     }
   };
 </script>

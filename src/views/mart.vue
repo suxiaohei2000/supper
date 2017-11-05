@@ -18,7 +18,7 @@
             <div class="ui-step-icon">
               <i class="iconfont">y</i>
               <i class="ui-step-number">2</i>
-              <span class="ui-step-text">设置身份信息</span>
+              <span class="ui-step-text">确认信息</span>
               <span class="ui-step-text-2">确认金额和地址</span>
             </div>
           </li>
@@ -36,61 +36,118 @@
       </div>
     </div>
     <div class="mart-content">
-      <ul class="money-list" v-if="step==1">
-        <li v-for="item in list" @click="next(item)">
-          <span class='fa':class="item.icon"></span>
-          <span>{{item.name}}</span>
-          <span>￥{{item.money}}</span>
-          <span class="fa fa-angle-double-right"></span>
-        </li>
-      </ul>
+     <div class="mart-step-1-content" v-if="step==1">
+       <div class="mart-step-box">
+         <div class="step-box">
+           <div class="head-title">
+             <span>请选择要兑换的货币</span>
+           </div>
+           <ul class="item-content-box">
+             <li v-for="item in moneyTypeList" @click="selectMoneyType(item)">
+               <div class=" li-box-left">
+                 <i class="icon-money" :class="item.icon"></i>
+               </div>
+               <div class="li-item-box " :class="moneyType.type==item.type?'active':''">
+                 {{item.name}}
+                 <i class="fa fa-check-square-o"></i>
+               </div>
+             </li>
+           </ul>
+           <div class="more-li">
+             更多币种，尽情期待
+           </div>
+         </div>
+         <div class="center">
+           <i class="fa fa-angle-double-right"></i>
+         </div>
+         <div class="step-box">
+           <div class="head-title">
+             <span>请选择支付方式</span>
+           </div>
+           <ul class="item-content-box">
+             <li v-for="item in payTypeList" @click="selectPayType(item)">
+               <div class=" li-box-left">
+                 <i class="icon-money" :class="item.icon"></i>
+               </div>
+               <div class="li-item-box " :class="payType.type==item.type?'active':''">
+                 {{item.name}}
+                 <i class="fa fa-check-square-o"></i>
+               </div>
+             </li>
+           </ul>
+         </div>
+       </div>
+       <div class="mart-step-btn-content">
+         <div class="btn-box">
+           <span class="btn" @click="next">下一步</span>
+         </div>
+       </div>
+     </div>
       <div class="mart-step-2-content" v-if="step==2">
-        <div class="top-content">
-          <span class="fa" :class="item.icon"></span>
-          <span>{{item.name}}</span>
-          <span>￥{{item.money}}</span>
-          <span>15分钟</span>
-          <span class="fa fa-question-circle" title="此价仅为参考价格，以实际到账结算价为准。"></span>
-        </div>
-        <div class="change-content">
-          <div class="input-box">
-            <i class="fa" :class="item.icon"></i>
-            <input type="number" v-model="changeMoney">
-          </div>
-          <span class="fa fa-angle-double-right"></span>
-          <div class="input-box">
-            <i class="fa fa-cny" ></i>
-            <input type="number" v-model="payMoney" disabled >
-          </div>
-        </div>
-        <div class="package-content">
-          <div class="package-box">
-            <span>你的钱包地址：</span>
-            <input type="text">
-          </div>
-          <div class="package-box">
-            <span>验证码：</span>
-            <input type="text">
-            <span>
+        <ul class="top-content">
+          <li>
+            <span>{{moneyType.type}}/USD: {{martMoney}}</span>
+          </li>
+          <li>
+            <span class="fa fa-question-circle"></span>
+            <span>仅为参考价格，以实际到账结算价为准。</span>
+          </li>
+          <li>
+            <div class="mart-step-btn-content">
+              <div class="btn-box">
+                <span class="btn" >刷新</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+       <div class="mart-step-box">
+         <div class="change-content">
+           <div class="input-box">
+             <i class="fa" :class="item.icon"></i>
+             <input type="number" v-model="changeMoney">
+           </div>
+           <span class="fa fa-angle-double-right"></span>
+           <div class="input-box">
+             <i class="fa fa-cny" ></i>
+             <input type="number" v-model="payMoney" disabled >
+           </div>
+         </div>
+         <div class="package-content">
+           <div class="package-box">
+             <span>你的钱包地址：</span>
+             <input type="text" placeholder="输入您的钱包地址（推荐使用imToken）">
+           </div>
+           <div class="package-box">
+             <span>验证码：</span>
+             <input type="text">
+             <span>
             </span>
-          </div>
-        </div>
-        <div class="mart-step-btn-content">
-          <div class="btn-box">
-            <span class="btn" @click="pre">上一步</span>
-            <span class="btn" @click="confirm">确认</span>
-          </div>
-        </div>
+           </div>
+         </div>
+         <div class="mart-step-btn-content">
+           <div class="btn-box">
+             <span class="btn" @click="pre">上一步</span>
+             <span class="btn" @click="confirm">确认</span>
+           </div>
+         </div>
+       </div>
       </div>
       <div class="mart-step-3-content" v-if="step==3">
         <div class="mart-step-title">
-          <p>您的兑换申请已经受理，请尽快完成转账操作。</p>
-          <p>若已完成转账，请等待并随时关注您的账户余额。</p>
+          <p>您的兑换申请已经受理，请尽快往以下地址完成转账操作。</p>
+          <p>
+            0x2701080fddac1df22ebe71af968bc7048d38ec09
+          </p>
+          <p>
+            <img src="../assets/images/payCode.png" alt="">
+          </p>
         </div>
         <ul class="order-content">
           <li>
             <span>订单号：</span>
-            <span>YTC2017082117213498765</span>
+            <span>YTC2017082117213498765
+            <i class="fa fa-question-circle-o" title="订单保留55分钟"></i>
+            </span>
           </li>
           <li>
             <span>币种：</span>
@@ -107,10 +164,6 @@
           <li>
             <span>结算方式：</span>
             <span>支付宝</span>
-          </li>
-          <li>
-            <span>用户ID：</span>
-            <span>老张头玩币</span>
           </li>
           <li>
             <span>用户钱包地址：</span>
@@ -132,6 +185,7 @@
   }
   .mart-container {
     position: relative;
+    padding-bottom: 10px;
     .steps-content {
       width: 780px;
       text-align: center;
@@ -235,9 +289,9 @@
             }
           }
           &.ui-step-active {
-            color: #f16f20;
+            color: #000;
             .iconfont {
-              color: #ff7001;
+              color:#43baff;
               &.ui-step-number{
                 color: #fff;
               }
@@ -246,10 +300,10 @@
         }
         .ui-step-done{
           .iconfont {
-            color: #ff9a00
+            color: #43baff
           }
           .ui-step-line {
-            background: #fc9c27
+            background: #43baff
           }
         }
       }
@@ -263,9 +317,9 @@
       width: 800px;
       margin:auto;
       position: relative;
-      padding:50px 20px;
+      /*padding:50px 20px;
       box-shadow: 0 0 5px #c7c5c5;
-      background: #fff;
+      background: #fff;*/
       .mart-step-btn-content{
         text-align: center;
         .btn-box{
@@ -289,64 +343,143 @@
           }
         }
       }
-      
-      .money-list{
-        width: 382px;
-        margin:auto;
-        
-        li{
-          display: block;
-          height:40px;
-          line-height:40px;
-          border-bottom:1px solid #b3b3b3;
-          font-size: 14px;
-          padding:0 15px;
-          cursor: pointer;
-          &:hover{
-            background: #0078ff;
-            border-color:transparent;
-            color:#fff;
+  
+      .mart-step-1-content{
+        .mart-step-box{
+          width: 100%;
+          display: flex;
+          margin-bottom:20px;
+        }
+        .step-box{
+          flex: 1;
+          height: 400px;
+          border: 1px solid #e3e3e3;
+          border-radius: 5px;
+          .head-title{
+            font-size:14px;
+            padding:10px;
+            background:#e3e3e3;
           }
-          span{
-            display: inline-block;
-            &:nth-child(1){
-            width: 50px;
+          
+          ul{
+            padding:20px 10px;
+            margin-bottom:20px;
+            li{
+              position: relative;
+              cursor: pointer;
+              &+li{
+                margin-top:20px;
+              }
+              .li-box-left{
+                width: 42px;
+                height: 42px;
+                position: absolute;
+                left:0;
+                z-index: 10;
+              }
+              .li-item-box{
+                border-radius: 5px;
+                border:1px solid #e3e3e3;
+                line-height:40px;
+                margin-left:20px;
+                padding:0 20px 0 40px;
+                position: relative;
+                &:hover{
+                  background: #f4f4f4;
+                }
+                &.active{
+                  background: #f4f4f4;
+                  i{
+                    display: block;
+                  }
+                }
+                i{
+                  float: right;
+                  width: 20px;
+                  height:20px;
+                  line-height: 40px;
+                  font-size:16px;
+                  color:#43baff;
+                  text-align: center;
+                  display: none;
+                }
+              }
+            }
+            .icon-money{
+              width: 100%;
+              height:100%;
+              background-repeat:no-repeat;
+              background-position: center;
+              background-size: cover;
+              background-color:#e3e3e3;
+              border-radius: 100%;
+            }
+            .icon-money-ETH{
+              background-image: url('../assets/images/icon-money-ETH.png');
+            }
+            .icon-money-BTC{
+              background-image: url('../assets/images/icon-money-BTC.png');
+            }
+            .icon-money-LTC{
+              background-image: url('../assets/images/icon-money-LTC.png');
+            }
+            .icon-money-payMoney{
+              background-image: url('../assets/images/icon-money-payMoney.png');
+            }
+            .icon-money-unionMoney{
+              background-image: url('../assets/images/icon-money-unionMoney.png');
+            }
           }
-            &:nth-child(2){
-              width: 150px;
-            }
-            &:nth-child(3){
-              width: 120px;
-            }
-            &:nth-child(4){
-              text-align: right;
-              font-size:16px;
-              width: 20px;
-            }
+          .more-li{
+            border-radius: 5px;
+            border:1px solid #e3e3e3;
+            line-height:30px;
+            text-align: center;
+            margin:0 10px;
+          }
+        }
+        .center{
+          width: 150px;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          i{
+            width: 20px;
+            height:20px;
+            font-size:20px;
+            color:#43baff;
           }
         }
       }
       .mart-step-2-content{
-        width: 400px;
+        width: 800px;
         margin:auto;
+        border: 1px solid #e3e3e3;
+        padding:20px ;
+        box-shadow: 0 0 5px #c7c5c5;
+        background: #fff;
+        .mart-step-box{
+          width: 400px;
+          margin:auto;
+        }
+       
         .top-content{
           display: flex;
           position: relative;
-          
           border-bottom: 1px dotted #b3b3b3;
           font-size:16px;
-          span{
-            flex:1;
-            display: block;
-            line-height: 40px;
-            &:first-child,&:last-child{
-              padding:0 10px;
-              width: 50px;
-              flex:none;
-              
+          align-items: center;
+          padding-bottom: 10px;
+          padding-left:10px;
+          padding-right:10px;
+          li{
+            &:first-child{
+              width: 200px;
             }
-            &:last-child{
-              text-align: right;
+            &:nth-child(2){
+              flex: 1;
+              margin:0 20px;
             }
           }
         }
@@ -423,6 +556,9 @@
       .mart-step-3-content{
         width: 500px;
         margin:auto;
+        box-shadow: 0 0 5px #c7c5c5;
+        background: #fff;
+        padding:29px 10px;
         .mart-step-title{
           font-size:16px;
           line-height: 30px;
@@ -441,10 +577,15 @@
             &:last-child{
               border-bottom: none;
             }
+            i{
+              float: right;
+              margin-top:5px;
+            }
             span{
               flex:1;
               display: block;
               vertical-align: middle;
+              position: relative;
               &:first-child{
                 width: 120px;
                 flex:none;
@@ -463,30 +604,40 @@
     data() {
       return {
         step:1,
-        list:[
+        moneyTypeList:[
           {
-            icon:'fa-btc',
-            name:'比特币',
-            money:'10000'
+            icon:'icon-money-ETH',
+            name:'ETH以太坊',
+            type:'ETH'
           },
           {
-            icon:'fa-inr',
-            name:'以太坊',
-            money:'10000'
+            icon:'icon-money-BTC',
+            name:'BTC 比特币',
+            type:'BTC'
           },
           {
-            icon:'fa-try',
-            name:'以太经典',
-            money:'10000'
+            icon:'icon-money-LTC',
+            name:'LTC莱特币',
+            type:'LTC'
+          }
+        ],
+        payTypeList:[
+          {
+            icon:'icon-money-payMoney',
+            name:'支付宝',
+            type:'pay'
           },
           {
-            icon:'fa-btc',
-            name:'莱特币',
-            money:'10000'
+            icon:'icon-money-unionMoney',
+            name:'银行卡',
+            type:'union'
           }
         ],
         item:{},
-        changeMoney:0.1
+        changeMoney:0.1,
+        moneyType:'',
+        payType:'',
+        martMoney:'255.55'
       };
     },
     computed:{
@@ -502,7 +653,7 @@
       },
       payMoney:function () {
         if(!isNaN(this.changeMoney+0)){
-          return (this.item.money*this.changeMoney).toFixed(2)
+          return (this.martMoney*this.changeMoney).toFixed(2)
         }
         
       }
@@ -514,6 +665,14 @@
     },
     methods:{
       next:function (item) {
+        if(!this.moneyType){
+          alert('请选择要兑换的币种');
+          return;
+        }
+        if(!this.payType){
+          alert('请选择支付方式');
+          return;
+        }
         this.step++;
         this.item=item;
       },
@@ -526,6 +685,12 @@
       },
       reStart:function () {
         this.step=1;
+      },
+      selectMoneyType:function (item) {
+        this.moneyType=item;
+      },
+      selectPayType:function (item) {
+        this.payType=item
       }
     }
   };
