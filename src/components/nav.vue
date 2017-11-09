@@ -120,7 +120,7 @@
       var route=this.$route
       var name=route.name;
       this.active=name;
-      var sessionToken=getCookie('sessionToken');
+      var sessionToken=getCookie('wms_user_identity');
       this.sessionToken=sessionToken;
       //滚动
       

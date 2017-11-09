@@ -112,7 +112,11 @@ export const session_storage={
 	    window.sessionStorage.removeItem(name);
     }
 }
-
+// 检查邮箱
+export function checkEmail(mail) {
+  let reg=/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
+   return reg.test(mail)
+}
 //检查手机号码格式
 export function checkMobieFormat(val){
     let reg = /^1(3|4|5|7|8)\d{9}$/;

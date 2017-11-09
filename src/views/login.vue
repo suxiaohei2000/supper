@@ -7,15 +7,15 @@
       <div class="form-content">
         <div class="input-box">
           <i class="fa fa-user"></i>
-          <input type="text" placeholder="请输入电子邮件">
+          <input type="text" placeholder="请输入电子邮件" v-model="userAccount">
         </div>
         <div class="input-box">
           <i class="fa fa-lock"></i>
-          <input type="password" placeholder="请输入密码">
+          <input type="password" placeholder="请输入密码" v-model="password">
         </div>
-        <div class="message-box">错误信息</div>
+        <div class="message-box">{{errMsg}}</div>
         <div class="btn-box">
-          <div class="btn" @click="login">登  录</div>
+          <div class="btn" @click="login">{{loginTxt}}</div>
         </div>
         <div class="login-footer">
           <a href="#">忘记密码</a>
@@ -77,7 +77,6 @@
       }
       .message-box {
         padding: 10px 0;
-        line-height: 20px;
         text-align: left;
         color: #ff001f;
       }
@@ -115,11 +114,18 @@
   }
 </style>
 <script>
-  import {setCookie} from '../assets/js/common'
+  import {setCookie} from '../assets/js/common';
+  import API from '../api'
 	export default {
 		name: '',
 		data() {
-			return {}
+			return {
+        errMsg:'',
+        userAccount:'',
+        password:'',
+        loginTxt:'登  录',
+        status:1
+      }
 		},
 		
 		created() {
@@ -129,11 +135,42 @@
 		},
 		methods:{
 		  login:function () {
-        setCookie('sessionToken','sessionToken');
-        var route=this.$route;
-        var query=route.query;
-        let redirect=query.redirect;
-        this.$router.replace(redirect?decodeURIComponent(query.redirect):'/')
+		    var _this=this;
+		    if(!this.status){
+		      return
+        }
+		    if(!this.userAccount){
+		      this.errMsg='帐号不能为空'
+		      return ;
+        }
+        if(!this.password){
+          this.errMsg='密码不能为空'
+          return ;
+        }
+        this.loginTxt='登录中...';
+        this.status=0;
+        API.login({
+          userAccount:this.userAccount,
+          password:this.password,
+          platform:'2',
+        }).then(function (data) {
+          _this.loginTxt='登  录';
+          _this.status=1;
+          setCookie('wms_user_identity',data.identity);
+          
+          var route=_this.$route;
+          var query=route.query;
+          let redirect=query.redirect||'/';
+          _this.$router.replace({
+            path:decodeURIComponent(redirect)
+          })
+        }).catch(function (data) {
+          _this.status=1;
+          _this.loginTxt='登  录';
+          _this.errMsg=data.msg||'登录失败'
+        })
+        
+       
       }
     }
 	}

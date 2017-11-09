@@ -28,18 +28,10 @@ module.exports = {
 		assetsSubDirectory: "static",
 		assetsPublicPath: "/",
 		proxyTable: {
-			"/japi/v1": {
-				target: "http://172.16.88.238:8080",
-				secure: false
-			},
-            "/japi/v2": {
-                target: "http://172.16.88.238:8080",
-                secure: false
-            },
-			/*"/v1": {
-				target: "http://172.16.88.135:8080",
-				secure: false
-			}*/
+			"/platform/web": {
+				target: "http://51duihuan.org",
+        changeOrigin: true,
+			}
 		},
 		// CSS Sourcemaps off by default because relative paths are "buggy"
 		// with this option, according to the CSS-Loader README

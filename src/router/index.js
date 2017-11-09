@@ -142,14 +142,13 @@ router.beforeEach((to, from, next) => {
   }
   document.title = title;
   // 是否需要登录
-  var sessionToken=$$.getCookie('sessionToken');
+  var sessionToken=$$.getCookie('wms_user_identity');
   if (to.matched.some(r => r.meta.requireAuth)) {
     if (sessionToken) {
       next();
     }
     else {
       let redirect=to.fullPath;
-      console.log(redirect)
       next({
         name:'login',
         query: {redirect: encodeURIComponent(redirect)}

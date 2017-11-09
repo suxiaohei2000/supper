@@ -7,21 +7,25 @@
       <div class="form-content">
         <div class="input-box">
           <i class="fa fa-user"></i>
-          <input type="text" placeholder="请输入电子邮件">
+          <input type="text" placeholder="请输入电子邮件" v-model="userAccount">
         </div>
         <div class="input-box">
           <i class="fa fa-lock"></i>
-          <input type="password" placeholder="请输入密码">
+          <input type="password" placeholder="请输入密码" v-model="password">
         </div>
-        <div class="input-box sms-box">
+        <div class="input-box">
+          <i class="fa fa-lock"></i>
+          <input type="password" placeholder="请再次输入密码" v-model="confirmPass">
+        </div>
+        <!--<div class="input-box sms-box">
           <input type="password" placeholder="请输入图片验证码">
           <span class="sms-img">
             <img src="../assets/images/sms.png" alt="">
           </span>
-        </div>
-        <div class="message-box">错误信息</div>
+        </div>-->
+        <div class="message-box">{{errMsg}}</div>
         <div class="btn-box">
-          <div class="btn">注册</div>
+          <div class="btn" @click="register">{{registerTxt}}</div>
         </div>
         <div class="login-footer">
           <a href="/#/login">已有账户登录</a>
@@ -106,7 +110,7 @@
       }
       .btn-box {
         overflow: hidden;
-        margin-bottom: 15px;
+        margin: 15px 0;
         .btn {
           background: #0190dc;
           font-size: 16px;
@@ -136,16 +140,61 @@
   }
 </style>
 <script>
+  var startTime=new Date().getTime();
+  import API from '../api'
+  import * as $$ from '../assets/js/common'
 	export default {
 		name: '',
 		data() {
-			return {}
+			return {
+        userAccount:'',
+        password:'',
+        confirmPass:'',
+        errMsg:'',
+        registerTxt:'注册'
+      }
 		},
 		
 		created() {
 		},
 		
 		mounted() {
-		}
+		},
+    methods:{
+		  register:function () {
+		    var _this=this;
+		    var endTime=new Date().getTime();
+		    if(endTime-startTime<2000){
+		      return;
+        }
+        if(!$$.checkEmail(this.userAccount)){
+		      this.errMsg='帐号必须是正确的邮箱地址';
+		      return ;
+        }
+        if(!$$.pwdReg.test(this.password)){
+          this.errMsg='请输入至少6-16位字母和数字组合的密码';
+          return ;
+        }
+        if(this.password!=this.confirmPass){
+          this.errMsg='两次输入密码不一致';
+          return ;
+        }
+        this.registerTxt='注册中...';
+        API.register({
+          userAccount:this.userAccount,
+          password:this.password,
+          confirmPass:this.confirmPass
+        }).then(function (data) {
+          _this.registerTxt='注册';
+          alert('注册成功')
+          _this.$router.replace({
+            name:'index'
+          })
+        }).catch(data=>{
+          _this.registerTxt='注册';
+          _this.errMsg=data.msg||'注册失败';
+        })
+      }
+    }
 	}
 </script>
