@@ -1,5 +1,5 @@
 <template>
-	<div class="exchange-container">
+	<div class="payment-container">
 	  <div class="title">
       结款记录
     </div>
@@ -73,7 +73,7 @@
 	</div>
 </template>
 <style lang="less" scroped>
-  .exchange-container{
+  .payment-container{
     .title{
       font-size: 18px;
       font-weight: normal;

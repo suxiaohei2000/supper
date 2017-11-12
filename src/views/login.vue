@@ -157,7 +157,9 @@
           _this.loginTxt='登  录';
           _this.status=1;
           setCookie('wms_user_identity',data.identity);
-          
+          setCookie('wms_user_id',data.userId);
+          setCookie('wms_account',data.userAccount);
+          setCookie('wms_login_source',data.platform);
           var route=_this.$route;
           var query=route.query;
           let redirect=query.redirect||'/';

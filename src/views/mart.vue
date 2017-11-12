@@ -95,7 +95,7 @@
           <li>
             <div class="mart-step-btn-content">
               <div class="btn-box">
-                <span class="btn" >刷新</span>
+                <span class="btn" @click="refreshPrice" ref="refreshPrice">刷新</span>
               </div>
             </div>
           </li>
@@ -115,11 +115,11 @@
          <div class="package-content">
            <div class="package-box">
              <span>你的钱包地址：</span>
-             <input type="text" placeholder="输入您的钱包地址（推荐使用imToken）">
+             <input type="text" placeholder="输入您的钱包地址（推荐使用imToken）" v-model="userWalletAddress">
            </div>
            <div class="package-box">
              <span>验证码：</span>
-             <input type="text">
+             <input type="text" v-model="validateCode">
              <span>
             </span>
            </div>
@@ -127,7 +127,7 @@
          <div class="mart-step-btn-content">
            <div class="btn-box">
              <span class="btn" @click="pre">上一步</span>
-             <span class="btn" @click="confirm">确认</span>
+             <span class="btn" @click="confirm" ref="confirmBtn">{{confirmBtnTxt}}</span>
            </div>
          </div>
        </div>
@@ -599,10 +599,12 @@
   }
 </style>
 <script>
+  import API from "../api/index";
   export default {
     name: "",
     data() {
       return {
+        confirmBtnTxt:'确定',
         step:1,
         moneyTypeList:[
           {
@@ -637,7 +639,9 @@
         changeMoney:0.1,
         moneyType:'',
         payType:'',
-        martMoney:'255.55'
+        martMoney:'',
+        userWalletAddress:'',
+        validateCode:''
       };
     },
     computed:{
@@ -664,6 +668,20 @@
     mounted() {
     },
     methods:{
+//      获取数据
+      getPrice:function () {
+        var _this=this;
+        API.getPrice({
+          coinType:_this.moneyType.type
+        }).then(function (data) {
+          _this.martMoney=data;
+          this.$refs.refreshPrice.style.pointerEvents='';
+        }).catch(function (err) {
+          alert(err.msg||'网络异常')
+          _this.$refs.refreshPrice.style.pointerEvents='';
+        })
+      },
+      //点击事件操作
       next:function (item) {
         if(!this.moneyType){
           alert('请选择要兑换的币种');
@@ -675,13 +693,45 @@
         }
         this.step++;
         this.item=item;
+        if(this.step==2){
+          this.getPrice();
+        }
       },
       pre:function () {
         this.step--;
         this.item=new Object()
       },
       confirm:function () {
-        this.next()
+        var _this=this;
+        if(!_this.martMoney){
+          alert('请重新获取交易价格');
+          return
+        }
+        if(!_this.userWalletAddress){
+          alert('请重新输入钱包地址');
+          return
+        }
+        if(!_this.validateCode){
+          alert('请重新输入验证码');
+          return
+        }
+        _this.$refs.confirmBtn.style.pointerEvents='none';
+        _this.confirmBtnTxt='确定中'
+        API.saleBTC({
+          count:_this.changeMoney,
+          price:_this.martMoney,
+          userWalletAddress:_this.userWalletAddress,
+          validateCode:_this.validateCode
+        }).then(function (data) {
+          _this.confirmBtnTxt='确定'
+          _this.$refs.confirmBtn.style.pointerEvents='';
+          this.next()
+        }).catch(function (err) {
+          _this.confirmBtnTxt='确定'
+          _this.$refs.confirmBtn.style.pointerEvents='';
+          alert('交易失败，请重新确定')
+        })
+       
       },
       reStart:function () {
         this.step=1;
@@ -691,6 +741,10 @@
       },
       selectPayType:function (item) {
         this.payType=item
+      },
+      refreshPrice:function () {
+        this.$refs.refreshPrice.style.pointerEvents='none';
+        this.getPrice();
       }
     }
   };

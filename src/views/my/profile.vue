@@ -6,11 +6,11 @@
     <div class="profile-content">
       <dl>
         <dt>电子邮件</dt>
-        <dd>500172013@qq.com</dd>
+        <dd>{{userInfo.userAccount}}</dd>
       </dl>
       <dl>
         <dt>会员ID</dt>
-        <dd>500172013</dd>
+        <dd>{{userInfo.userId}}</dd>
       </dl>
       <dl>
         <dt>昵称</dt>
@@ -18,19 +18,19 @@
           <input type="text" placeholder="有钱人">
         </dd>
       </dl>
-      <dl>
+     <!-- <dl>
         <dt>支付宝账号</dt>
         <dd>
           <input type="text" placeholder="501172013@qq.com">
         </dd>
-      </dl>
+      </dl>-->
       <dl>
         <dt>注册IP</dt>
         <dd>255.255.255.255</dd>
       </dl>
       <dl>
         <dt>注册时间</dt>
-        <dd>2017年10月28日 15:00:00</dd>
+        <dd>{{userInfo.regTime}}</dd>
       </dl>
     </div>
     <div class="btn-box">
@@ -94,16 +94,30 @@
   }
 </style>
 <script>
+  import API from '../../api'
 	export default {
 		name: '',
 		data() {
-			return {}
+			return {
+        userInfo:{}
+      }
 		},
 		
 		created() {
 		},
 		
 		mounted() {
-		}
+		  this.getUserInfo();
+		},
+    methods:{
+		  getUserInfo(){
+		    var _this=this;
+		    API.getUserInfo().then(function (data) {
+          _this.userInfo=data||{}
+        }).catch(function (err) {
+          alert(err.message||'网络错误')
+        })
+      }
+    }
 	}
 </script>

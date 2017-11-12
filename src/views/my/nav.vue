@@ -128,16 +128,18 @@
 		name: '',
 		data() {
 			return {
-			  active:''
       }
 		},
 		created() {
 		},
 		
-		mounted() {
-		  var route=this.$route
-      var name=route.name;
-		  this.active=name;
+		computed: {
+		  active:function () {
+        var route=this.$route
+        var name=route.name;
+        return name;
+      }
+		 
 		},
     methods:{
       loginOut:function () {

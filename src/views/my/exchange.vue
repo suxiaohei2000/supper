@@ -5,7 +5,7 @@
     </div>
     <div class="exchange-content">
       <div class="exchange-head">
-        <span>共20条记录</span>
+        <span ><span v-if="pageRowCount">共{{pageRowCount}}条记录</span></span>
         <div class="btn-box">
           <div class="btn">导出记录</div>
         </div>
@@ -26,77 +26,24 @@
           <span>订单号</span>
         </div>
         <div class="table">
-          <div class="list">
+          <div class="list" v-for="item in list">
             <span>
               <i class="fa fa-square-o"></i>
             </span>
-            <span>以太经典</span>
-            <span>2017-08-21</span>
-            <span>2017-08-21</span>
-            <span>1000</span>
-            <span>88888.10</span>
-            <span>88888.10</span>
-            <span>88888.10</span>
+            <span>{{item.tradeType | tradeTypeFilter}}</span>
+            <span>{{item.createTime | timeFilter}}</span>
+            <span>{{item.updateTime | timeFilter}}</span>
+            <span>{{item.tradeCnt}}</span>
+            <span>{{item.tradePrice}}</span>
+            <span>{{item.tradeFee}}</span>
+            <span>{{item.tradeMoney}}</span>
             <span>支付宝</span>
-            <span>YTC2017082117213498765</span>
-          </div>
-          <div class="list">
-            <span>
-              <i class="fa fa-square-o"></i>
-            </span>
-            <span>以太经典</span>
-            <span>2017-08-21</span>
-            <span>2017-08-21</span>
-            <span>1000</span>
-            <span>88888.10</span>
-            <span>88888.10</span>
-            <span>88888.10</span>
-            <span>支付宝</span>
-            <span>YTC2017082117213498765</span>
-          </div>
-          <div class="list">
-            <span>
-              <i class="fa fa-square-o"></i>
-            </span>
-            <span>以太经典</span>
-            <span>2017-08-21</span>
-            <span>2017-08-21</span>
-            <span>1000</span>
-            <span>88888.10</span>
-            <span>88888.10</span>
-            <span>88888.10</span>
-            <span>支付宝</span>
-            <span>YTC2017082117213498765</span>
-          </div>
-          <div class="list">
-            <span>
-              <i class="fa fa-square-o"></i>
-            </span>
-            <span>以太经典</span>
-            <span>2017-08-21</span>
-            <span>2017-08-21</span>
-            <span>1000</span>
-            <span>88888.10</span>
-            <span>88888.10</span>
-            <span>88888.10</span>
-            <span>支付宝</span>
-            <span>YTC2017082117213498765</span>
-          </div>
-          <div class="list">
-            <span>
-              <i class="fa fa-square-o"></i>
-            </span>
-            <span>以太经典</span>
-            <span>2017-08-21</span>
-            <span>2017-08-21</span>
-            <span>1000</span>
-            <span>88888.10</span>
-            <span>88888.10</span>
-            <span>88888.10</span>
-            <span>支付宝</span>
-            <span>YTC2017082117213498765</span>
+            <span>{{item.tradeNo}}</span>
           </div>
         </div>
+      </div>
+      <div class="page-container">
+        <page v-if="list" :totalPage=totalPage  :perPageNumber="perPageNumber" :getList=getList ></page>
       </div>
     </div>
 	</div>
@@ -178,7 +125,7 @@
             width: 80px;
           }
           &:nth-child(10){
-            width: 250px;
+            width: 260px;
           }
         }
       }
@@ -202,16 +149,65 @@
   }
 </style>
 <script>
+  import API from '../../api'
+  import Page from '../../components/page.vue';
+  import * as $$ from '../../assets/js/common'
 	export default {
 		name: '',
+    components:{
+		  page:Page
+    },
 		data() {
-			return {}
+			return {
+			  totalPage:1,
+        perPageNumber:10,
+        pageRowCount:'',
+        list:''
+      }
 		},
 		
 		created() {
 		},
 		
 		mounted() {
-		}
+		  this.getList(1,this.perPageNumber)
+		},
+    methods:{
+		  getList:function (currentPage,number) {
+		    var _this=this;
+        API.getOrderList({
+          currentPage:currentPage,
+          number:number
+        }).then(function (data) {
+            data=data||{}
+            var page=data.page||{};
+            _this.totalPage=page.itotalPageCount;
+            _this.pageRowCount=page.itotalRowCount;
+            _this.list=data.list||[]
+        }).catch(function (err) {
+          alert(err.msg||'网络异常')
+        })
+        
+      }
+    },
+    filters:{
+		  tradeTypeFilter:function (val) {
+		    var text=''
+		    switch (val){
+          case 'ETH':
+            text = '以太坊';
+            break;
+          case 'BTC':
+            text = '比特币';
+            break;
+          default:
+            text=''
+        }
+        return text;
+      },
+		  timeFilter:function (val) {
+		    return $$.formatDate(val,'yyyy-mm-dd')
+      }
+    }
 	}
 </script>
