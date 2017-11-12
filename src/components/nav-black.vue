@@ -75,14 +75,15 @@
       }
       li{
         float: left;
-        padding:20px 15px;
         line-height:20px;
         font-size:14px;
         cursor: pointer;
         border-bottom:2px solid transparent;
         color:#fff;
         a{
+          padding:20px 15px;
           color:inherit;
+          display: block;
         }
         &.active{
           color:#fff;

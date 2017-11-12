@@ -124,6 +124,7 @@
 </style>
 <script>
   import {delCookie} from '../../assets/js/common'
+  import API from '../../api'
 	export default {
 		name: '',
 		data() {
@@ -143,7 +144,8 @@
 		},
     methods:{
       loginOut:function () {
-        delCookie('sessionToken');
+        API.loginout();
+        delCookie('wms_user_identity');
         window.location.href='/'
       }
     }

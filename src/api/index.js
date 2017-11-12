@@ -58,6 +58,13 @@ let API = {
       type: "get"
     });
   },
+  loginout(params) {
+    return axiosAction({
+      url: "/account/logout",
+      params: params,
+      type: "get"
+    });
+  },
   register(params) {
     return axiosAction({
       url: "/account/add",
@@ -98,7 +105,14 @@ let API = {
       url:'/trade/orderlist',
       params:params
     })
-  }
+  },
+  //修改密码
+  resetPass(params){
+    return axiosAction({
+      url:'/account/resetpass',
+      params:params
+    })
+  },
   
 };
 
