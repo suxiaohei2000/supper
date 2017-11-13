@@ -23,22 +23,8 @@
           <span>钱包</span>
         </div>
         <div class="table" v-if="list&&list.length>0">
-         <!-- <div class="list">
-            <span>
-              <i class="fa fa-square-o"></i>
-            </span>
-            <span>11</span>
-            <span>11</span>
-            <span>11</span>
-            <span>支付宝</span>
-            <span>11</span>
-            <span style="text-align: center">
-              <div class="btn-box">
-                <div class="btn">查看</div>
-              </div>
-            </span>
-          </div>-->
           <div class="list" v-for="(item,index) in list">
+            
             <span>
               <i class="fa fa-square-o"></i>
             </span>
@@ -47,7 +33,7 @@
             <span>{{item.tradeCnt}}</span>
             <span>支付宝</span>
             <span>{{item.tradeNo}}</span>
-            <span>
+            <span style="text-align: center">
               <div class="btn-box" @click="handleLookWallet(index)" v-if="!item.show">
                 <div class="btn">查看</div>
               </div>
@@ -110,39 +96,44 @@
             
           }
         }
-        span {
-          padding: 12px 5px;
-          text-align: left;
-          white-space: nowrap;
-          vertical-align: middle;
-          display: inline-block;
-          &:nth-child(1) {
-            width: 30px;
-            text-align: center;
-          }
-          &:nth-child(2) {
-            width: 80px;
-          }
-          &:nth-child(3) {
-            width: 140px;
-          }
-          &:nth-child(4) {
-            width: 120px;
-          }
-          &:nth-child(5) {
-            width: 120px;
-          }
-          &:nth-child(6) {
-            width: 200px;
-          }
-          &:nth-child(7) {
-            padding: 5px;
-            width: 200px;
+        .list,.thread{
+          &>span {
+            padding: 12px 5px;
+            text-align: left;
+            white-space: nowrap;
+            vertical-align: middle;
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            &:nth-child(1) {
+              width: 30px;
+              text-align: center;
+            }
+            &:nth-child(2) {
+              width: 80px;
+            }
+            &:nth-child(3) {
+              width: 140px;
+            }
+            &:nth-child(4) {
+              width: 120px;
+            }
+            &:nth-child(5) {
+              width: 120px;
+            }
+            &:nth-child(6) {
+              width: 200px;
+            }
+            &:nth-child(7) {
+              padding: 5px;
+              width: 200px;
+            }
           }
         }
       }
     }
     .btn-box {
+      text-align: center;
       .btn {
         border: 1px solid #cad2db;
         color: #171717;
@@ -173,9 +164,9 @@
     data() {
       return {
         totalPage: 1,
-        perPageNumber: 10,
+        perPageNumber: 1,
         pageRowCount: "",
-        list: ""
+        list: ''
       };
     },
     
@@ -196,7 +187,8 @@
           var page = data.page || {};
           _this.totalPage = page.itotalPageCount;
           _this.pageRowCount = page.itotalRowCount;
-          _this.list = data.list || [];
+          _this.list=[];
+          _this.list=data.list
         }).catch(function (err) {
           _this.list=[]
           alert(err.msg || "网络异常");
@@ -204,7 +196,7 @@
         
       },
       handleLookWallet:function (index) {
-        this.list[index].show=1
+        this.$set(this.list[index],'show',1)
       }
     },
     filters: {

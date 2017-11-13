@@ -63,8 +63,9 @@ export function unFormatAccount (value, type) {
 export function formatDate(value, formatString) {
 	var date = new Date();
 	if (value) {
+   /*
 		//兼容safari
-		value=value.replace(/-/g,'/');
+		value=value.replace(/-/g,'/');*/
 		date = new Date(value);
 	}
 

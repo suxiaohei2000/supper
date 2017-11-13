@@ -15,6 +15,7 @@
   }
   .pagination {
     position: relative;
+    display: inline-block;
     li{
       display: inline-block;
       margin:0 5px;
@@ -45,11 +46,15 @@
       }
       &.active a{
         background:#2d8cf0;
-        color:#fff;
+        color:#fff !important;
         border:1px solid #2d8cf0;
       }
       &.page_disabled{
         background:#e3e3e3;
+        
+        a{
+          color:#ddd !important;
+        }
       }
     }
     

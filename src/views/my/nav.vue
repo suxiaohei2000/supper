@@ -3,7 +3,7 @@
     <header>
       <div class="header-content">
         <span></span>
-        <span>有钱人</span>
+        <span>{{userName}}</span>
       </div>
     </header>
     <ul>
@@ -14,13 +14,13 @@
         </a>
         
       </li>
-      <li :class="active=='my-package'?'active':''">
+      <!--<li :class="active=='my-package'?'active':''">
         <a href="/#/my/package">
           <i class="fa fa-credit-card"></i>
           <span >钱包地址</span>
         </a>
         
-      </li>
+      </li>-->
       <li :class="active=='my-exchange'?'active':''">
         <a href="/#/my/exchange">
           <i class="fa fa-cc-paypal"></i>
@@ -123,7 +123,7 @@
   }
 </style>
 <script>
-  import {delCookie} from '../../assets/js/common'
+  import {getCookie,delCookie} from '../../assets/js/common'
   import API from '../../api'
 	export default {
 		name: '',
@@ -139,6 +139,9 @@
         var route=this.$route
         var name=route.name;
         return name;
+      },
+      userName:function () {
+        return getCookie('userName')||''
       }
 		 
 		},

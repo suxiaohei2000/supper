@@ -30,7 +30,7 @@
       </dl>
       <dl>
         <dt>注册时间</dt>
-        <dd>{{userInfo.regTime}}</dd>
+        <dd>{{userInfo.regTime | timeFilter}}</dd>
       </dl>
     </div>
     <div class="btn-box">
@@ -94,6 +94,7 @@
   }
 </style>
 <script>
+  import * as $$ from '../../assets/js/common';
   import API from '../../api'
 	export default {
 		name: '',
@@ -114,9 +115,15 @@
 		    var _this=this;
 		    API.getUserInfo().then(function (data) {
           _this.userInfo=data||{}
+          $$.setCookie('userName',data.userName);
         }).catch(function (err) {
           alert(err.message||'网络错误')
         })
+      }
+    },
+    filters: {
+      timeFilter: function (val) {
+        return $$.formatDate(val, "YYYY-MM-DD hh:mm:ss");
       }
     }
 	}

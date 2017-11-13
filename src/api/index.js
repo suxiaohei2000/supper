@@ -67,7 +67,7 @@ let API = {
   },
   register(params) {
     return axiosAction({
-      url: "/account/add",
+      url: "/account/register",
       params: params,
     });
   },
@@ -81,7 +81,7 @@ let API = {
   //确定交易
   saleBTC(params) {
     return axiosAction({
-      url: "/trade/bithumb/getprice",
+      url: "/trade/salebtc",
       params: params,
     });
   },

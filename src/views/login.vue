@@ -160,6 +160,7 @@
           setCookie('wms_user_id',data.userId);
           setCookie('wms_account',data.userAccount);
           setCookie('wms_login_source',data.platform);
+          setCookie('userName',data.userName);
           var route=_this.$route;
           var query=route.query;
           let redirect=query.redirect||'/';

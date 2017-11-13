@@ -24,37 +24,21 @@
           <span>打款凭证</span>
         </div>
         <div class="table" v-if="list&&list.length>0">
-          <div class="list">
-			 <span>
-			   <i class="fa fa-square-o"></i>
-			 </span>
-            <span>订单号</span>
-            <span>结算金额</span>
-            <span>结算方式</span>
-            <span>结算时间</span>
-            <span>打款时间</span>
-            <span>打款状态</span>
-            <span style="text-align: center">
-			   <div class="btn-box">
-				 <div class="btn">查看</div>
-			   </div>
-			 </span>
-          </div>
           <div class="list" v-for="(item,index) in list">
             <span>
               <i class="fa fa-square-o"></i>
             </span>
-            <span>{{item.tradeNo }}</span>
+            <span :title="item.tradeNo">{{item.tradeNo }}</span>
             <span>{{item.tradeMoney }}</span>
             <span>{{item.tradePayType}}</span>
-            <span>{{item.updateTime}}</span>
+            <span>{{item.updateTime | timeFilter}}</span>
             <span>打款时间</span>
             <span>打款状态</span>
-            <span>
+            <span style="text-align: center">
               <div class="btn-box" @click="handleLookWallet(index)" v-if="!item.show">
                 <div class="btn">查看</div>
               </div>
-              <span v-else>{{item.userWalletAddress}}</span>
+              <span v-else :title=item.userWalletAddress>{{item.userWalletAddress}}</span>
             </span>
           </div>
         </div>
@@ -113,38 +97,42 @@
             
           }
         }
-        span {
-          padding: 12px 5px;
-          text-align: left;
-          white-space: nowrap;
-          vertical-align: middle;
-          display: inline-block;
-          &:nth-child(1) {
-            width: 30px;
-            text-align: center;
-          }
-          &:nth-child(2) {
-            width: 200px;
-          }
-          &:nth-child(3) {
-            width: 100px;
-          }
-          &:nth-child(4) {
-            width: 120px;
-          }
-          &:nth-child(5) {
-            width: 120px;
-          }
-          &:nth-child(6) {
-            width: 100px;
-          }
-  
-          &:nth-child(7) {
-            width:100px;
-          }
-          &:nth-child(8) {
-            padding: 5px;
-            width:120px;
+        .list,.thread{
+          &>span {
+            padding: 12px 5px;
+            text-align: left;
+            white-space: nowrap;
+            vertical-align: middle;
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            &:nth-child(1) {
+              width: 30px;
+              text-align: center;
+            }
+            &:nth-child(2) {
+              width: 200px;
+            }
+            &:nth-child(3) {
+              width: 100px;
+            }
+            &:nth-child(4) {
+              width: 100px;
+            }
+            &:nth-child(5) {
+              width: 140px;
+            }
+            &:nth-child(6) {
+              width: 100px;
+            }
+    
+            &:nth-child(7) {
+              width:100px;
+            }
+            &:nth-child(8) {
+              padding: 5px;
+              width:120px;
+            }
           }
         }
       }
@@ -211,7 +199,8 @@
         
       },
       handleLookWallet: function (index) {
-        this.list[index].show = 1;
+        this.$set(this.list[index],'show',1)
+//        this.list[index].show = 1;
       }
     },
     filters: {
