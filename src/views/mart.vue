@@ -677,7 +677,6 @@
         }).then(function (data) {
           _this.martMoney=data;
           _this.$refs.refreshPrice.style.pointerEvents='';
-          
         }).catch(function (err) {
           alert(err.msg||'网络异常')
           _this.$refs.refreshPrice.style.pointerEvents='';
@@ -719,6 +718,12 @@
         }
         _this.$refs.confirmBtn.style.pointerEvents='none';
         _this.confirmBtnTxt='确定中'
+       /* console.log(API.saleBTC({
+          count:_this.changeMoney,
+          price:_this.martMoney,
+          userWalletAddress:_this.userWalletAddress,
+          validateCode:_this.validateCode
+        }))*/
         API.saleBTC({
           count:_this.changeMoney,
           price:_this.martMoney,
@@ -728,7 +733,7 @@
           _this.confirmBtnTxt='确定'
           _this.$refs.confirmBtn.style.pointerEvents='';
           _this.martData=Object.assign({},data)
-          this.next()
+          _this.next()
         }).catch(function (err) {
           _this.confirmBtnTxt='确定'
           _this.$refs.confirmBtn.style.pointerEvents='';
