@@ -145,29 +145,29 @@
         <ul class="order-content">
           <li>
             <span>订单号：</span>
-            <span>YTC2017082117213498765
+            <span>{{martData.tradeNo}}
             <i class="fa fa-question-circle-o" title="订单保留55分钟"></i>
             </span>
           </li>
           <li>
             <span>币种：</span>
-            <span>以太坊</span>
+            <span>{{martData.tradeType}}</span>
           </li>
           <li>
             <span>下单时间：</span>
-            <span>20170821 17:21:34</span>
+            <span>{{martData.createTime}}</span>
           </li>
           <li>
             <span>兑换数量：</span>
-            <span>32</span>
+            <span>{{martData.tradeCnt}}</span>
           </li>
           <li>
             <span>结算方式：</span>
-            <span>支付宝</span>
+            <span>{{payType.name}}</span>
           </li>
           <li>
             <span>用户钱包地址：</span>
-            <span>2017082**********98765</span>
+            <span>{{martData.userWalletAddress}}</span>
           </li>
         </ul>
         <div class="mart-step-btn-content">
@@ -641,7 +641,8 @@
         payType:'',
         martMoney:'',
         userWalletAddress:'',
-        validateCode:''
+        validateCode:'',
+        martData:{}
       };
     },
     computed:{
@@ -675,7 +676,8 @@
           coinType:_this.moneyType.type
         }).then(function (data) {
           _this.martMoney=data;
-          this.$refs.refreshPrice.style.pointerEvents='';
+          _this.$refs.refreshPrice.style.pointerEvents='';
+          
         }).catch(function (err) {
           alert(err.msg||'网络异常')
           _this.$refs.refreshPrice.style.pointerEvents='';
@@ -725,6 +727,7 @@
         }).then(function (data) {
           _this.confirmBtnTxt='确定'
           _this.$refs.confirmBtn.style.pointerEvents='';
+          _this.martData=Object.assign({},data)
           this.next()
         }).catch(function (err) {
           _this.confirmBtnTxt='确定'
