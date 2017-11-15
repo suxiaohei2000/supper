@@ -1,11 +1,11 @@
 <template>
   <footer>
-    <div class="footer-nav">
+    <!--<div class="footer-nav">
       <div class="footer-nav-box">
         <div class="nav-box-left">
           <div class="nav_log">
             <div class="log">
-              <img src="/static/images/log.png" alt="">
+              <img src="/static/images/logo.png" alt="">
             </div>
             <span>51兑换</span>
           </div>
@@ -29,11 +29,11 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div>-->
     <div class="footer-bottom">
       <div>
         <span>Copyright 2017.All rights reserved.</span>
-        <span>China: +86 2 33 44 55 66    US: +11 222 333 444    support@shark.com</span>
+        <span>QQ群：681207350</span>
       </div>
     </div>
   </footer>
@@ -106,7 +106,7 @@
       &>div{
         width: 1200px;
         margin:auto;
-        padding:10px 0 20px;
+        padding:20px 0 40px;
         span{
           float: left;
           &:last-child{

@@ -3,7 +3,7 @@
     <header>
       <div class="header-content">
         <span></span>
-        <span>{{userName}}</span>
+        <!--<span>{{userName}}</span>-->
       </div>
     </header>
     <ul>
@@ -81,7 +81,7 @@
       }
     }
     ul{
-      margin-bottom:10px;
+      /*margin-bottom:10px;*/
       font-size:14px;
       li{
         height:40px;

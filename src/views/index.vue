@@ -11,7 +11,7 @@
           </div>
           <div class="slider-button">
             <div class="btn active" @click="start">开始</div>
-            <div class="btn">帮助</div>
+            <!--<div class="btn">帮助</div>-->
           </div>
         </div>
       
@@ -82,7 +82,7 @@
     </div>
     <div class="home-page-2-footer">
       <div class="slider-title">联系我们</div>
-      <span>欢迎来到xx，最新最快最安全，QQ群：xxxxxx</span>
+      <span>QQ群：681207350</span>
     </div>
     <div class="home-page-3">
       <div class="home-page-3-content">
@@ -92,7 +92,7 @@
         <ul>
           <li>
             <span>免费吗</span>
-            <span>只需要5%的手续费，便可以轻松兑换现金</span>
+            <span>只需要3%的手续费，便可以轻松兑换现金</span>
           </li>
           <li>
             <span>服务稳定么？</span>
@@ -110,7 +110,7 @@
           </li>
         </ul>
         <p >
-          还有问题？请加QQ群：******888
+          还有问题？请加QQ群：681207350
         </p>
       </div>
     </div>
@@ -120,7 +120,7 @@
   .home-container {
     min-width: 1200px;
     position: relative;
-    margin-top:0 !important;
+    margin-top:-62px !important;
     .slider-container {
       height: 800px;
       width: 100%;

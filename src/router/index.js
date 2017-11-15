@@ -8,9 +8,23 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     mode: "hash",
     routes: [
+      {
+        name: "home",
+        path: "/",
+        redirect:'/mart',
+        // components:{
+        //   default:()=>import('../views/mart.vue'),
+        //   nav: ()=>import('../components/nav-black.vue'),
+        //   footer:()=>import('../components/footer.vue')
+        // },
+        // meta:{
+        //   title:'交易中心',
+        //   // requireAuth:true,
+        // }
+      },
         {
             name: "index",
-            path: "/",
+            path: "/index",
 	          components: {
 		          default: ()=>import('../views/index.vue'),
 		          nav: ()=>import('../components/nav.vue'),
@@ -48,7 +62,7 @@ const router = new VueRouter({
         },
         meta:{
           title:'交易中心',
-          requireAuth:true,
+          // requireAuth:true,
         }
       },
       {
@@ -125,8 +139,6 @@ const router = new VueRouter({
             }
           },
         ]
-        
-        
       }
       
 	   /* { path: '*', component: NotFoundComponent }*/

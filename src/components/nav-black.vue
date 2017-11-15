@@ -3,15 +3,15 @@
     <header class="nav-active">
       <nav class="nav_bar">
         <a class="nav_log" href="/">
-          <div class="log"><img src="/static/images/log.png" alt=""></div>
+          <div class="log"><img src="/static/images/logo.png" alt=""></div>
           <span>51兑换</span>
         </a>
         <ul class="nav_menu">
-          <li :class="active=='index'?'active':''"><a href="/">首页</a></li>
+          <li :class="active=='index'?'active':''"><a href="/#/index">首页</a></li>
           <li :class="active=='mart'?'active':''"><a href="/#/mart">交易中心</a></li>
-          <li><a href="#">帮助中心</a></li>
+         <!-- <li><a href="#">帮助中心</a></li>
           <li><a href="#">关于我们</a></li>
-          <li><a href="#">技术支持</a></li>
+          <li><a href="#">技术支持</a></li>-->
         </ul>
         <div class="nav-other-box">
           <li :class="active=='login'?'active':''" v-if="!sessionToken"><a href="/#/login">登录</a></li>

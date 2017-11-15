@@ -9,7 +9,6 @@ import * as $$ from "../assets/js/common";
 let baseURL = "/platform/web";
 
 axios.defaults.baseURL = baseURL;
-
 //控制loading的数组
 let axiosLoadingStateArr = [];
 
@@ -62,7 +61,7 @@ let API = {
     return axiosAction({
       url: "/account/logout",
       params: params,
-      type: "get"
+      type: "get",
     });
   },
   register(params) {
@@ -133,7 +132,7 @@ function axiosAction(actionParams) {
   if (type == "get") {
     return axios.get(axiosUrl + "?" + qs.stringify(axiosParams));
   }
-  return axios.post(axiosUrl, axiosParams);
+  return axios.post(axiosUrl, qs.stringify(axiosParams));
 }
 
 

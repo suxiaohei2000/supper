@@ -5,19 +5,23 @@
     </div>
     <div class="profile-content">
       <dl>
-        <dt>电子邮件</dt>
+        <dt>电子邮件:</dt>
         <dd>{{userInfo.userAccount}}</dd>
       </dl>
       <dl>
-        <dt>会员ID</dt>
+        <dt>会员ID:</dt>
         <dd>{{userInfo.userId}}</dd>
       </dl>
       <dl>
+        <dt>支付宝地址</dt>
+        <dd>{{userInfo.alipayAddr}}</dd>
+      </dl>
+      <!--<dl>
         <dt>昵称</dt>
         <dd>
           <input type="text" placeholder="有钱人">
         </dd>
-      </dl>
+      </dl>-->
      <!-- <dl>
         <dt>支付宝账号</dt>
         <dd>
@@ -25,17 +29,17 @@
         </dd>
       </dl>-->
       <dl>
-        <dt>注册IP</dt>
-        <dd>255.255.255.255</dd>
+        <dt>注册IP:</dt>
+        <dd>{{userInfo.registerIp}}</dd>
       </dl>
       <dl>
-        <dt>注册时间</dt>
+        <dt>注册时间:</dt>
         <dd>{{userInfo.regTime | timeFilter}}</dd>
       </dl>
     </div>
-    <div class="btn-box">
+  <!--  <div class="btn-box">
       <div class="btn">保存</div>
-    </div>
+    </div>-->
 	</div>
 </template>
 <style lang="less" scroped>
@@ -55,9 +59,14 @@
         dt{
           font-size:14px;
           padding-bottom:10px;
+          display: inline-block;
+          width:70px;
+          text-align: right;
         }
         dd{
+          display: inline-block;
           font-size:13px;
+          margin-left:10px;
           input{
             width: 200px;
             background: #fafbfc;

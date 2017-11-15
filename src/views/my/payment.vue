@@ -1,14 +1,14 @@
 <template>
   <div class="payment-container">
     <div class="title">
-      兑换记录
+      结款记录
     </div>
     <div class="exchange-content">
       <div class="exchange-head">
         <span><span v-if="pageRowCount">共{{pageRowCount}}条记录</span></span>
-        <div class="btn-box">
+        <!--<div class="btn-box">
           <div class="btn">导出记录</div>
-        </div>
+        </div>-->
       </div>
       <div class="exchange-table">
         <div class="thread">
@@ -30,10 +30,10 @@
             </span>
             <span :title="item.tradeNo">{{item.tradeNo }}</span>
             <span>{{item.tradeMoney }}</span>
-            <span>{{item.tradePayType}}</span>
+            <span>支付宝</span>
             <span>{{item.updateTime | timeFilter}}</span>
-            <span>打款时间</span>
-            <span>打款状态</span>
+            <span>{{item.createTime | timeFilter}}</span>
+            <span>{{item.tradeStatus | textStatus}}</span>
             <span style="text-align: center">
               <div class="btn-box" @click="handleLookWallet(index)" v-if="!item.show">
                 <div class="btn">查看</div>
@@ -45,7 +45,7 @@
         <div class="table" style="text-align: center;padding:10px;" v-if="list&&list.length<1">暂无记录</div>
       </div>
       <div class="page-container">
-        <page v-if="list&&totalPage>1" :totalPage=totalPage :perPageNumber="perPageNumber" :getList=getList></page>
+        <page v-if="list&&totalPage>1" :totalPage=totalPage :perPageNumber=perPageNumber :getList=getList></page>
       </div>
     </div>
   </div>
@@ -106,6 +106,12 @@
             display: inline-block;
             overflow: hidden;
             text-overflow: ellipsis;
+            span{
+              display: block;
+              width: 100%;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
             &:nth-child(1) {
               width: 30px;
               text-align: center;
@@ -204,17 +210,23 @@
       }
     },
     filters: {
-      tradeTypeFilter: function (val) {
+      textStatus: function (val) {
         var text = "";
         switch (val) {
-          case "ETH":
-            text = "以太坊";
+          case "00":
+            text = "受理成功";
             break;
-          case "BTC":
-            text = "比特币";
+          case "01":
+            text = "客户交易成功";
+            break;
+          case "02":
+            text = "后台交易成功";
+            break;
+          case "03":
+            text = "无效或作废";
             break;
           default:
-            text = "";
+            text = "无状态";
         }
         return text;
       },

@@ -2,7 +2,7 @@
 	<div class="login-container">
     <div class="login-content">
       <div class="log">
-        <img src="/static/images/log.png" alt="51兑换">
+        <img src="/static/images/logo.png" alt="51兑换">
       </div>
       <div class="form-content">
         <div class="input-box">

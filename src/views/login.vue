@@ -2,7 +2,7 @@
 	<div class="login-container">
     <div class="login-content">
       <div class="log">
-        <img src="/static/images/log.png" alt="51兑换">
+        <a href="/"><img src="/static/images/logo.png" alt="51兑换"></a>
       </div>
       <div class="form-content">
         <div class="input-box">
@@ -15,10 +15,10 @@
         </div>
         <div class="message-box">{{errMsg}}</div>
         <div class="btn-box">
-          <div class="btn" @click="login">{{loginTxt}}</div>
+          <div class="btn" @click="login"  >{{loginTxt}}</div>
         </div>
         <div class="login-footer">
-          <a href="#">忘记密码</a>
+         <!-- <a href="#">忘记密码</a>-->
           <a href="/#/register">马上注册</a>
         </div>
       </div>
@@ -168,6 +168,7 @@
             path:decodeURIComponent(redirect)
           })
         }).catch(function (data) {
+          console.log(data)
           _this.status=1;
           _this.loginTxt='登  录';
           _this.errMsg=data.msg||'登录失败'
