@@ -146,6 +146,8 @@
           alipayAddr:_this.userInfo.alipayAddr,
           phone:_this.userInfo.phone,
           id:_this.userInfo.id,
+          alipayName:_this.userInfo.alipayName,
+          
         }).then(function (data) {
           alert('保存成功');
           _this.btnTxt='保存';

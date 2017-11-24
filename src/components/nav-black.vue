@@ -7,7 +7,7 @@
           <span>51兑换</span>
         </a>
         <ul class="nav_menu">
-          <li :class="active=='index'?'active':''"><a href="/#/index">首页</a></li>
+          <!--<li :class="active=='index'?'active':''"><a href="/#/index">首页</a></li>-->
           <li :class="active=='mart'?'active':''"><a href="/#/mart">交易中心</a></li>
           <li ><a href="javascipt:void 0">QQ群：681207350</a></li>
          <!-- <li><a href="#">帮助中心</a></li>
