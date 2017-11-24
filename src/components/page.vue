@@ -1,11 +1,11 @@
 <template>
   <ul class="pagination" >
-    <li v-if="currentPage != 1" @click="currentPage-- && goto(currentPage)" ><a href="#"><i class="fa fa-angle-left"></i></a></li>
+    <li v-if="pageNo != 1" @click="pageNo-- && goto(pageNo)" ><a href="#"><i class="fa fa-angle-left"></i></a></li>
     <li v-else class="page_disabled" ><a href="javascript:void 0"><i class="fa fa-angle-left"></i></a></li>
-    <li v-for="index in pages" @click="goto(index)" :class="{'active':currentPage == index}" :key="index">
+    <li v-for="index in pages" @click="goto(index)" :class="{'active':pageNo == index}" :key="index">
       <a href="#" >{{index}}</a>
     </li>
-    <li v-if="totalPage != currentPage && totalPage != 0 " @click="currentPage++ && goto(currentPage++)"><a href="#" ><i class="fa fa-angle-right"></i></a></li>
+    <li v-if="totalPage != pageNo && totalPage != 0 " @click="pageNo++ && goto(pageNo++)"><a href="#" ><i class="fa fa-angle-right"></i></a></li>
     <li v-else class="page_disabled"><a href="javascript:void 0" ><i class="fa fa-angle-right"></i></a></li>
   </ul>
 </template>
@@ -65,11 +65,14 @@
 		name: '',
 		data() {
 			return {
-        currentPage:1,
       }
 		},
 		props:{
       totalPage:{
+        type:Number,
+        default:1
+      },
+      pageNo:{
         type:Number,
         default:1
       },
@@ -91,14 +94,14 @@
     computed:{
       pages:function(){
         var pag = [];
-        if( this.currentPage < this.prePageNumber ){ //如果当前的激活的项 小于要显示的条数
+        if( this.pageNo < this.prePageNumber ){ //如果当前的激活的项 小于要显示的条数
           //总页数和要显示的条数那个大就显示多少条
           var i = Math.min(this.prePageNumber,this.totalPage);
           while(i){
             pag.unshift(i--);
           }
         }else{ //当前页数大于显示页数了
-          var middle = this.currentPage - Math.floor(this.prePageNumber / 2 ),//从哪里开始
+          var middle = this.pageNo - Math.floor(this.prePageNumber / 2 ),//从哪里开始
             i = this.prePageNumber;
           if( middle >  (this.totalPage - this.prePageNumber)  ){
             middle = (this.totalPage - this.prePageNumber) + 1
@@ -112,8 +115,7 @@
     },
     methods:{
       goto:function(index){
-        if(index == this.currentPage) return;
-        this.currentPage = index;
+        if(index == this.pageNo) return;
         this.getList(index,this.prePageNumber)
       }
     }

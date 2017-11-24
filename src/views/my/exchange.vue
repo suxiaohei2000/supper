@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="page-container">
-        <page v-if="list&&totalPage>1" :totalPage=totalPage :perPageNumber=perPageNumber :getList=getList></page>
+        <page v-if="list&&totalPage>1" :pageNo=pageNo :totalPage=totalPage :perPageNumber=perPageNumber :getList=getList></page>
       </div>
     </div>
   </div>
@@ -173,6 +173,7 @@
     data() {
       return {
         totalPage: 1,
+        pageNo:0,
         perPageNumber: 10,
         pageRowCount: "",
         list: ''
@@ -198,6 +199,7 @@
           _this.pageRowCount = page.itotalRowCount;
           _this.list=[];
           _this.list=data.list
+          _this.pageNo++;
         }).catch(function (err) {
           _this.list=[]
           alert(err.msg || "网络异常");
