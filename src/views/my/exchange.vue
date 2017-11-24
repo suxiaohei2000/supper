@@ -24,7 +24,6 @@
         </div>
         <div class="table" v-if="list&&list.length>0">
           <div class="list" v-for="(item,index) in list">
-            
             <span>
               <i class="fa fa-square-o"></i>
             </span>
@@ -37,11 +36,15 @@
               <div class="btn-box" @click="handleLookWallet(index)" v-if="!item.show">
                 <div class="btn">查看</div>
               </div>
-              <span v-else>{{item.alipayAddr}}</span>
+              <span v-else>{{item.userWalletAddress}}</span>
             </span>
           </div>
         </div>
         <div class="table" style="text-align: center;padding:10px;" v-if="list&&list.length<1">暂无记录</div>
+        <div class="table" style="text-align: center;padding:10px;" v-if="!list">
+          <i class="fa fa-spinner fa-spin"></i>
+          <span>获取数据中</span>
+        </div>
       </div>
       <div class="page-container">
         <page v-if="list&&totalPage>1" :totalPage=totalPage :perPageNumber=perPageNumber :getList=getList></page>

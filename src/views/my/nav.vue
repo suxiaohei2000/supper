@@ -42,11 +42,18 @@
         </a>
         
       </li>
+      <li :class="active=='my-password'?'active':''">
+        <a href="javascript:void 0" @click="loginOut">
+          <i class="fa fa-sign-out"></i>
+          <span>退出</span>
+        </a>
+  
+      </li>
     </ul>
-    <div class="logout" @click="loginOut">
+  <!--  <div class="logout" @click="loginOut">
       <i class="fa fa-sign-out"></i>
       <span>退出</span>
-    </div>
+    </div>-->
 	  
 	</div>
 </template>
@@ -102,7 +109,8 @@
         }
         i{
           width: 20px;
-          margin-right:10px;
+          margin-right:15px;
+          text-align: center;
         }
       }
     }
@@ -111,8 +119,11 @@
       padding-left:22px;
       border-top:1px dotted #E3E3E3;
       cursor: pointer;
+      font-size:14px;
       i{
-        margin-right:10px;
+        width: 20px;
+        margin-right:15px;
+        text-align: center;
       }
       &:hover{
         background: #eeeeee;

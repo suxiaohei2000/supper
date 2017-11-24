@@ -13,7 +13,11 @@
         <dd>{{userInfo.userId}}</dd>
       </dl>
       <dl>
-        <dt>支付宝地址:</dt>
+        <dt>支付宝姓名:</dt>
+        <dd><input type="text" :placeholder=userInfo.alipayName v-model="userInfo.alipayName"></dd>
+      </dl>
+      <dl>
+        <dt>支付宝帐号:</dt>
         <dd><input type="text" :placeholder=userInfo.alipayAddr v-model="userInfo.alipayAddr"></dd>
       </dl>
       <!--<dl>
@@ -110,10 +114,10 @@
 		data() {
 			return {
         userInfo:{
-          alipayAddr:''
+          alipayAddr:'',
+          alipayName:''
         },
         btnTxt:'保存',
-        alipayAddr:''
       }
 		},
 		

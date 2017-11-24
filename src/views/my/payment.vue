@@ -43,6 +43,10 @@
           </div>
         </div>
         <div class="table" style="text-align: center;padding:10px;" v-if="list&&list.length<1">暂无记录</div>
+        <div class="table" style="text-align: center;padding:10px;" v-if="!list">
+          <i class="fa fa-spinner fa-spin"></i>
+          <span>获取数据中</span>
+        </div>
       </div>
       <div class="page-container">
         <page v-if="list&&totalPage>1" :totalPage=totalPage :perPageNumber=perPageNumber :getList=getList></page>

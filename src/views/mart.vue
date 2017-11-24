@@ -86,7 +86,7 @@
       <div class="mart-step-2-content" v-if="step==2">
         <ul class="top-content">
           <li>
-            <span>{{moneyType.type}}/KRW: {{martMoney}}</span>
+            <span>{{moneyType.type}}/CNY: {{martMoney}}</span>
           </li>
           <li>
             <span class="fa fa-question-circle"></span>
@@ -108,7 +108,7 @@
             </div>
             <span class="fa fa-angle-double-right"></span>
             <div class="input-box">
-              <i class="fa fa-krw"></i>
+              <i class="fa fa-cny"></i>
               <input type="number" v-model="payMoney" disabled>
             </div>
           </div>
