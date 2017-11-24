@@ -38,7 +38,7 @@
 <style lang="less">
   @import "./assets/css/main.less";
   .app-content{
-    @diff :60px;
+    @diff :61px;
     min-height:calc(~"100% - @{diff}");
     overflow: hidden;
     &>div{

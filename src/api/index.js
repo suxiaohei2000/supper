@@ -33,10 +33,14 @@ axios.interceptors.response.use(
     if (status === 200 || status === 304) {
       switch (code) {
         case 0:
-          return data.value;
+          return Promise.resolve(data.value);
           break;
         case 1006:
+        case 1016:
+        case 1013:
           //登录失效
+          window.location.href='/#/login';
+          alert('请重新登录')
           break;
         default:
           return Promise.reject(data);
@@ -46,6 +50,7 @@ axios.interceptors.response.use(
     }
   },
   error => {
+    return Promise.reject(error);
   }
 );
 
@@ -54,7 +59,6 @@ let API = {
     return axiosAction({
       url: "/account/login",
       params: params,
-      type: "get"
     });
   },
   loginout(params) {
@@ -109,6 +113,13 @@ let API = {
   resetPass(params){
     return axiosAction({
       url:'/account/resetpass',
+      params:params
+    })
+  },
+  //修改支付地址
+  updateAccount(params){
+    return axiosAction({
+      url:'/account/update',
       params:params
     })
   },

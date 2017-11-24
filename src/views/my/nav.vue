@@ -147,7 +147,7 @@
 		},
     methods:{
       loginOut:function () {
-        API.loginout();
+//        API.loginout();
         delCookie('wms_user_identity');
         window.location.href='/'
       }

@@ -13,8 +13,8 @@
         <dd>{{userInfo.userId}}</dd>
       </dl>
       <dl>
-        <dt>支付宝地址</dt>
-        <dd>{{userInfo.alipayAddr}}</dd>
+        <dt>支付宝地址:</dt>
+        <dd><input type="text" :placeholder=userInfo.alipayAddr v-model="userInfo.alipayAddr"></dd>
       </dl>
       <!--<dl>
         <dt>昵称</dt>
@@ -37,9 +37,9 @@
         <dd>{{userInfo.regTime | timeFilter}}</dd>
       </dl>
     </div>
-  <!--  <div class="btn-box">
-      <div class="btn">保存</div>
-    </div>-->
+    <div class="btn-box">
+      <div class="btn" @click="updateAccount" ref="btn">{{btnTxt}}</div>
+    </div>
 	</div>
 </template>
 <style lang="less" scroped>
@@ -60,7 +60,7 @@
           font-size:14px;
           padding-bottom:10px;
           display: inline-block;
-          width:70px;
+          width:75px;
           text-align: right;
         }
         dd{
@@ -109,7 +109,11 @@
 		name: '',
 		data() {
 			return {
-        userInfo:{}
+        userInfo:{
+          alipayAddr:''
+        },
+        btnTxt:'保存',
+        alipayAddr:''
       }
 		},
 		
@@ -126,9 +130,29 @@
           _this.userInfo=data||{}
           $$.setCookie('userName',data.userName);
         }).catch(function (err) {
+          alert(err.msg||'网络错误')
+        })
+      },
+      updateAccount(){
+		    var _this=this;
+        this.$refs.btn.style.pointerEvents = "auto";
+        _this.btnTxt='保存中...'
+        API.updateAccount({
+          userName:_this.userInfo.userName,
+          alipayAddr:_this.userInfo.alipayAddr,
+          phone:_this.userInfo.phone,
+          id:_this.userInfo.id,
+        }).then(function (data) {
+          alert('保存成功');
+          _this.btnTxt='保存';
+          this.$refs.btn.style.pointerEvents = "none";
+        }).catch(function (err) {
+          this.$refs.btn.style.pointerEvents = "none";
+          _this.btnTxt='保存'
           alert(err.message||'网络错误')
         })
       }
+      
     },
     filters: {
       timeFilter: function (val) {
