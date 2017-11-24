@@ -85,8 +85,15 @@
       </div>
       <div class="mart-step-2-content" v-if="step==2">
         <ul class="top-content">
-          <li>
-            <span>{{moneyType.type}}/CNY: {{martMoney}}</span>
+          <li v-if="isLoadPrice==2">
+            <span>{{moneyType.type}}/{{ore.oreType}}: {{ore.orePrice}}</span>
+          </li>
+          <li v-else-if="isLoadPrice==1">
+            <i class="fa fa-spinner fa-spin"></i>
+            <span>获取价格中...</span>
+          </li>
+          <li v-else>
+            <span style="color:red">获取价格失败,请重新获取</span>
           </li>
           <li>
             <span class="fa fa-question-circle"></span>
@@ -108,7 +115,7 @@
             </div>
             <span class="fa fa-angle-double-right"></span>
             <div class="input-box">
-              <i class="fa fa-cny"></i>
+              <i class="fa " :class="oreTypeClass" ></i>
               <input type="number" v-model="payMoney" disabled>
             </div>
           </div>
@@ -650,8 +657,10 @@
         userWalletAddress: "",
         validateCode: "",
         martData: {},
-        time: new Date().getTime()
-        
+        time: new Date().getTime(),
+        ore:{},
+        isLoadPrice:1,//0 失败 1加载 2 成功
+        oreTypeClass:''
       };
     },
     computed: {
@@ -666,8 +675,8 @@
         return step_class;
       },
       payMoney: function () {
-        if (!isNaN(this.changeMoney + 0)) {
-          return (this.martMoney * this.changeMoney).toFixed(2);
+        if (this.martMoney &&!isNaN(this.changeMoney + 0)) {
+          return (this.martMoney * this.changeMoney).toFixed(3);
         }
         
       },
@@ -686,12 +695,17 @@
 //      获取数据
       getPrice: function () {
         var _this = this;
+        _this.isLoadPrice=1;
         API.getPrice({
           coinType: _this.moneyType.type
         }).then(function (data) {
-          _this.martMoney = data;
+          _this.isLoadPrice=2;
+          _this.ore = Object.assign({},data||{});
+          _this.martMoney =data.orePrice ;
+          _this.oreTypeClass='fa-'+data.oreType.toLowerCase();
           _this.$refs.refreshPrice.style.pointerEvents = "";
         }).catch(function (err) {
+          _this.isLoadPrice=0
           alert(err.msg || "网络异常");
           _this.$refs.refreshPrice.style.pointerEvents = "";
         });
@@ -761,7 +775,7 @@
         }).catch(function (err) {
           _this.confirmBtnTxt = "确定";
           _this.$refs.confirmBtn.style.pointerEvents = "";
-          alert("交易失败，请重新确定");
+          alert(err.msg||"交易失败，请重新确定");
         });
         
       },
@@ -790,6 +804,9 @@
     filters: {
       timeFilter: function (val) {
         return $$.formatDate(val, "YYYY-MM-DD hh:mm:ss");
+      },
+      lowCase:function (val) {
+        return val?val.toLowerCase():val
       }
     }
   };
