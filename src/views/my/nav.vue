@@ -42,8 +42,8 @@
         </a>
         
       </li>
-      <li :class="active=='my-password'?'active':''">
-        <a href="javascript:void 0" @click="loginOut">
+      <li >
+        <a href="javascript:void(0)" @click="loginOut">
           <i class="fa fa-sign-out"></i>
           <span>退出</span>
         </a>
