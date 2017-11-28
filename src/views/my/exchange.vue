@@ -18,8 +18,11 @@
           <span>币种</span>
           <span>下单时间</span>
           <span>兑换量</span>
-          <span>结算方式</span>
+          <span>订单金额</span>
           <span>订单号</span>
+          <span>手续费</span>
+          <span>结算金额</span>
+          <span>订单状态</span>
           <span>钱包</span>
         </div>
         <div class="table" v-if="list&&list.length>0">
@@ -30,13 +33,16 @@
             <span>{{item.tradeType }}</span>
             <span>{{item.createTime | timeFilter}}</span>
             <span>{{item.tradeCnt}}</span>
-            <span>支付宝</span>
+            <span>{{item.tradeMoney}}</span>
             <span>{{item.tradeNo}}</span>
+            <span>{{item.tradeFee}}</span>
+            <span>{{item.tradeMoneyBackCNY}}</span>
+            <span>{{item.orderStatus | formatStatus}}</span>
             <span style="text-align: center">
               <div class="btn-box" @click="handleLookWallet(index)" v-if="!item.show">
                 <div class="btn">查看</div>
               </div>
-              <span v-else>{{item.userWalletAddress}}</span>
+              <span v-else :title="item.userWalletAddress">{{item.userWalletAddress}}</span>
             </span>
           </div>
         </div>
@@ -115,27 +121,36 @@
               text-overflow: ellipsis;
             }
             &:nth-child(1) {
-              width: 30px;
+              width: 20px;
               text-align: center;
             }
             &:nth-child(2) {
-              width: 80px;
+              width: 40px;
             }
             &:nth-child(3) {
               width: 140px;
             }
             &:nth-child(4) {
-              width: 120px;
+              width: 60px;
             }
             &:nth-child(5) {
-              width: 120px;
+              width: 80px;
             }
             &:nth-child(6) {
-              width: 200px;
+              width: 180px;
             }
             &:nth-child(7) {
+              width: 80px;
+            }
+            &:nth-child(8) {
+              width: 80px;
+            }
+            &:nth-child(9) {
+              width: 80px;
+            }
+            &:nth-child(10) {
               padding: 5px;
-              width: 200px;
+              width: 120px;
             }
           }
         }
@@ -189,6 +204,7 @@
     methods: {
       getList: function (currentPage, number) {
         var _this = this;
+        _this.list=''
         API.getOrderList({
           currentPage: currentPage,
           number: number
@@ -199,7 +215,7 @@
           _this.pageRowCount = page.itotalRowCount;
           _this.list=[];
           _this.list=data.list
-          _this.pageNo++;
+          _this.pageNo=currentPage;
         }).catch(function (err) {
           _this.list=[]
           alert(err.msg || "网络异常");
@@ -211,20 +227,23 @@
       }
     },
     filters: {
-      /*tradeTypeFilter: function (val) {
+      formatStatus: function (val) {
         var text = "";
         switch (val) {
-          case "ETH":
-            text = "以太坊";
+          case "01":
+            text = "正在处理";
             break;
-          case "BTC":
-            text = "比特币";
+          case "02":
+            text = "交易成功";
+            break;
+          case "03":
+            text = "无效";
             break;
           default:
             text = "";
         }
         return text;
-      },*/
+      },
       timeFilter: function (val) {
         return $$.formatDate(val, "YYYY-MM-DD hh:mm:ss");
       }

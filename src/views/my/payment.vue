@@ -204,7 +204,7 @@
           _this.totalPage = page.itotalPageCount;
           _this.pageRowCount = page.itotalRowCount;
           _this.list = data.list || [];
-          _this.pageNo++;
+          _this.pageNo=currentPage;
         }).catch(function (err) {
           _this.list = [];
           alert(err.msg || "网络异常");
