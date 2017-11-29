@@ -28,13 +28,13 @@
         </a>
         
       </li>
-      <li :class="active=='my-payment'?'active':''">
+     <!-- <li :class="active=='my-payment'?'active':''">
         <a href="/#/my/payment">
           <i class="fa fa-money"></i>
           <span>结款记录</span>
         </a>
         
-      </li>
+      </li>-->
       <li :class="active=='my-password'?'active':''">
         <a href="/#/my/password">
           <i class="fa fa-lock"></i>

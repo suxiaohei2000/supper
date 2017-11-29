@@ -214,7 +214,7 @@
           _this.totalPage = page.itotalPageCount;
           _this.pageRowCount = page.itotalRowCount;
           _this.list=[];
-          _this.list=data.list
+          _this.list=data.list;
           _this.pageNo=currentPage;
         }).catch(function (err) {
           _this.list=[]
